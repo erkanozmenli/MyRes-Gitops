@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: myres-trip-svc
-          image: erkanozmenli/myres-trip-svc:0.1.0-alpha.7
+          image: erkanozmenli/myres-trip-svc:0.1.0-alpha.8
           env:
             - name: ASPNETCORE_ENVIRONMENT
               value: DevCluster
