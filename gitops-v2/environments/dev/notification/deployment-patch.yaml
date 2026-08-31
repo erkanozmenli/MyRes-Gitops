@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: myres-notification-svc
-          image: erkanozmenli/myres-notification-svc:0.1.0-alpha.290
+          image: erkanozmenli/myres-notification-svc:0.1.0-alpha.5
           env:
             - name: ASPNETCORE_ENVIRONMENT
               value: DevCluster
