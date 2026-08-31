@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: myres-frontend-svc
-          image: erkanozmenli/myres-frontend-svc:0.1.0-alpha.5
+          image: erkanozmenli/myres-frontend-svc:0.1.0-alpha.7
           env:
             - name: ASPNETCORE_ENVIRONMENT
               value: DevCluster
