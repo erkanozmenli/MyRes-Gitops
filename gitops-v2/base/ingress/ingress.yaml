@@ -1,0 +1,84 @@
+﻿apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: myres-ingress
+  labels:
+    app.kubernetes.io/name: myres-ingress
+    app.kubernetes.io/component: ingress
+    app.kubernetes.io/part-of: myres
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+spec:
+  ingressClassName: traefik
+  tls:
+  - hosts:
+    - myres.dev
+    - api.myres.dev
+    - auth.myres.dev
+    secretName: myres-tls
+  rules:
+  # Frontend + BFF/API routes
+  - host: myres.dev
+    http:
+      paths:
+      # Gateway
+      - path: /v1
+        pathType: Prefix
+        backend:
+          service:
+            name: gateway-clusterip
+            port:
+              name: http
+      - path: /bff
+        pathType: Prefix
+        backend:
+          service:
+            name: gateway-clusterip
+            port:
+              name: http
+      - path: /signin-oidc
+        pathType: Prefix
+        backend:
+          service:
+            name: gateway-clusterip
+            port:
+              name: http
+      - path: /signout-callback-oidc
+        pathType: Prefix
+        backend:
+          service:
+            name: gateway-clusterip
+            port:
+              name: http
+       # Frontend
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: frontend-clusterip
+            port:
+              name: http
+
+  # Public Gateway
+  - host: api.myres.dev
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: gateway-clusterip
+            port:
+              name: http
+
+  # Keycloak
+  - host: auth.myres.dev
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: keycloak-clusterip
+            port:
+              name: http              

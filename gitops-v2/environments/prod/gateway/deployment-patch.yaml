@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gateway-svc
+spec:
+  template:
+    spec:
+      containers:
+        - name: myres-gateway-svc
+          image: erkanozmenli/myres-gateway-svc:0.0.1-296
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: DevCluster
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: http://otel-collector:4317
+            - name: OTEL_EXPORTER_OTLP_PROTOCOL
+              value: grpc
+            - name: ConnectionStrings__redis
+              value: "redis:6379"
+            - name: Cors__AllowedOrigins__0
+              value: https://myres.dev
+            - name: Authentication__Keycloak__Authority
+              value: "https://auth.myres.dev/realms/k3sdemo"
+            - name: Authentication__Keycloak__ClientId
+              value: "myres-gateway-bff"
+            - name: Authentication__Keycloak__ClientSecret
+              value: "uvVvE8lIh7EGD34DiNZigSTeYDzjghRt"
+            - name: Authentication__Keycloak__Audience
+              value: "myres-gateway-api"
+            - name: Frontend__BaseUrl
+              value: "https://myres.dev"
+            - name: ForwardedHeaders__KnownNetwork
+              value: "10.42.0.0/24"
+            - name: ForwardedHeaders__KnownProxies
+              value: ""
+            - name: ApplicationUrls__AllowedOrigins__0
+              value: "https://myres.dev"
+            - name: ApplicationUrls__AllowedOrigins__1
+              value: "https://api.myres.dev"

@@ -1,0 +1,32 @@
+﻿apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: dev-v2
+
+resources:
+  - ../../base/trip
+  - ../../base/payment
+  - ../../base/provider
+  - ../../base/notification  
+  - ../../base/mssql
+  - ../../base/keycloak
+  - ../../base/redis
+  - ../../base/gateway
+  - ../../base/frontend
+  - ../../base/ingress
+  - ../../base/otel-collector
+  - ../../base/rabbitmq
+  - mssql/nodeport.yaml
+  - rabbitmq/nodeport.yaml
+
+patches:
+  - path: gateway/deployment-patch.yaml
+  - path: trip/deployment-patch.yaml
+  - path: payment/deployment-patch.yaml
+  - path: frontend/deployment-patch.yaml
+  - path: provider/deployment-patch.yaml
+  - path: notification/deployment-patch.yaml
+  - path: mssql/deployment-patch.yaml
+  - path: keycloak/deployment-patch.yaml
+  - path: rabbitmq/deployment-patch.yaml
+  - path: otel-collector/deployment-patch.yaml

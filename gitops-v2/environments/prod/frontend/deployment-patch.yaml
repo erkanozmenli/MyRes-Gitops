@@ -1,0 +1,13 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-svc
+spec:
+  template:
+    spec:
+      containers:
+        - name: myres-frontend-svc
+          image: erkanozmenli/myres-frontend-svc:0.0.1-296
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: DevCluster

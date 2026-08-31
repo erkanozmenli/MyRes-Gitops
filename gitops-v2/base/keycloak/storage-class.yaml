@@ -1,0 +1,11 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: keycloak-storage
+  labels:
+    app.kubernetes.io/name: keycloak
+    app.kubernetes.io/component: identity
+    app.kubernetes.io/part-of: myres
+provisioner: rancher.io/local-path
+allowVolumeExpansion: true
+volumeBindingMode: WaitForFirstConsumer

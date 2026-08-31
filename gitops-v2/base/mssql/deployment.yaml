@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mssql-svc
+  labels:
+    app.kubernetes.io/name: mssql
+    app.kubernetes.io/component: database
+    app.kubernetes.io/part-of: myres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: mssql
+      app.kubernetes.io/component: database
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: mssql
+        app.kubernetes.io/component: database
+        app.kubernetes.io/part-of: myres
+    spec:
+      containers:
+      - name: mssql
+        image: mcr.microsoft.com/mssql/server:2022-latest
+        ports:
+        - name: tds
+          containerPort: 1433
