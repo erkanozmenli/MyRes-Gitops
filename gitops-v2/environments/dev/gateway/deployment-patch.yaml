@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: myres-gateway-svc
-          image: erkanozmenli/myres-gateway-svc:0.1.0-alpha.290
+          image: erkanozmenli/myres-gateway-svc:0.1.0-alpha.5
           env:
             - name: ASPNETCORE_ENVIRONMENT
               value: DevCluster
